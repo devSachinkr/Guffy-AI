@@ -21,7 +21,6 @@ export const useSignInHook = () => {
   });
 
   const handleSubmit = form.handleSubmit(async (data: userLoginProps) => {
-    alert('dfdf')
     if (!isLoaded) return;
     setLoading(true);
     try {

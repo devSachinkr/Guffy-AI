@@ -1,14 +1,14 @@
 "use client";
 import { USER_LOGIN_FORM } from "@/constants/forms";
 import React from "react";
-import { FieldValues, UseFormRegister, useForm } from "react-hook-form";
+import { FieldValues, UseFormRegister, useForm, useFormContext } from "react-hook-form";
 import FormGenerator from "../form-generator/sign-up-details";
 
 const LoginForm = () => {
   const {
     register,
     formState: { errors },
-  } = useForm();
+  } = useFormContext();
   return (
     <div>
       <h2 className="text-limeGreen md:text-4xl font-bold">Login</h2>

@@ -7,7 +7,6 @@ import Link from 'next/link'
 import React from 'react'
 
 const SignInPage = () => {
-   const {handleSubmit}=useSignInHook();
   return (
     <div className="flex-1 py-36 md:px-16 w-full">
       <div className="flex flex-col h-full gap-3">
@@ -15,10 +14,9 @@ const SignInPage = () => {
           <div className="flex flex-col gap-3">
             <LoginForm />
             <div className="w-full flex flex-col gap-3 items-center">
-              <Button
+            <Button
                 type="submit"
                 className="w-full"
-                onClick={handleSubmit}
               >
                 Submit
               </Button>

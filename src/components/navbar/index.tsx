@@ -27,7 +27,7 @@ function NavBar() {
         <li className='hover:text-lime-400'>Contact us</li>
       </ul>
       <Link
-        href="/dashboard"
+        href="/auth/sign-in"
         className="bg-limeGreen px-4 py-2 rounded-md text-white"
       >
         Free Trial

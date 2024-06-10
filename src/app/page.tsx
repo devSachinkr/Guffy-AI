@@ -6,9 +6,23 @@ import React from "react";
 import frame from "../../public/iphone-frame.png";
 import { subscriptionCards } from "@/constants/subscriptions";
 import SubscriptionCard from "@/components/subscription/subscription-card";
+import { getBlogPosts } from "@/actions/landing/index";
+import { Card, CardDescription, CardTitle } from "@/components/ui/card";
+import parse from "html-react-parser";
+import { getMonthName } from "@/lib/utils";
 type Props = {};
 
-const page = (props: Props) => {
+const page = async (props: Props) => {
+  const posts:
+    | {
+        id: string;
+        title: string;
+        image: string;
+        content: string;
+        createdAt: Date;
+      }[]
+    | undefined
+    | null = await getBlogPosts();
   return (
     <div>
       <NavBar />
@@ -47,16 +61,60 @@ const page = (props: Props) => {
       </section>
 
       <section>
-        <h2 className="text-center text-[2rem] md:text-[3rem]
-         bg-gradient-to-r from-limeGreen to-lime-200 text-transparent bg-clip-text relative">Subscriptions Made Simple</h2>
-         <p className="text-center w-[80%] mx-auto">Effortlessly manage your subscriptions. Sign up, renew, and access your services with ease. Subscription made simple!</p>
-         <div className="flex items-center justify-center w-full flex-col md:flex-row">
-          {
-            subscriptionCards.map((plan)=>(
-              <SubscriptionCard key={plan.priceId} {...plan}/>
-            ))
-          }
-         </div>
+        <h2
+          className="text-center text-[2rem] md:text-[3rem]
+         bg-gradient-to-r from-limeGreen to-lime-200 text-transparent bg-clip-text relative"
+        >
+          Subscriptions Made Simple
+        </h2>
+        <p className="text-center w-[80%] mx-auto">
+          Effortlessly manage your subscriptions. Sign up, renew, and access
+          your services with ease. Subscription made simple!
+        </p>
+        <div className="flex items-center justify-center w-full flex-col md:flex-row">
+          {subscriptionCards.map((plan) => (
+            <SubscriptionCard key={plan.priceId} {...plan} />
+          ))}
+        </div>
+      </section>
+
+      <h2
+          className="text-center text-[2rem] md:text-[3rem]
+         bg-gradient-to-r from-limeGreen to-lime-200 text-transparent bg-clip-text relative mt-4"
+        >
+          Blogs  Room
+        </h2>
+        <p className="text-center w-[80%] mx-auto">
+        Explore our insights on AI, technology, and optimizing your business.
+        </p>
+      <section className="lg:grid-cols-3 grid-cols-1 grid gap-5 container mt-16">
+        {posts &&
+          posts.map((p) => (
+            <Link href={`/blogs/${p.id}`} key={p.id}>
+              <Card className="flex flex-col gap-2 rounded-xl overflow-hidden h-full hover:bg-gray-600 ">
+                <div className="relative w-full aspect-video">
+                  <Image
+                    src={String(process.env.CLOUDWAYS_UPLOADS_URL).concat(
+                      p.image
+                    )}
+                    alt="blog images"
+                    fill
+                  />
+                </div>
+                <div
+                  className="py-5 px-10 flex flex-col gap-5
+            "
+                >
+                  <CardDescription>
+                    {getMonthName(p.createdAt.getMonth())}{" "}
+                    {p.createdAt.getDate()}, {p.createdAt.getFullYear()}
+                  </CardDescription>
+                  <CardTitle>{p.title}</CardTitle>
+                  {parse(p.content.slice(4, 100))}...
+                </div>
+              </Card>
+            </Link>
+          ))}
       </section>
     </div>
   );
