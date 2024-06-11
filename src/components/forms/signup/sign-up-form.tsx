@@ -1,11 +1,9 @@
 "use client";
-import { ToastNotify } from "@/components/global/ToastNotify";
 import { Loader } from "@/components/global/loader";
-import { AuthContext, AuthProvider } from "@/context/use-auth-context";
+import { AuthProvider } from "@/context/use-auth-context";
 import { useSignUpForm } from "@/hooks/sign-up/use-sign-up";
-import React, { useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { toast } from "sonner";
+import React from "react";
+import { FormProvider } from "react-hook-form";
 type Props = {
   children: React.ReactNode;
 };
