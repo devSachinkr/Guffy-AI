@@ -11,7 +11,7 @@ const initialValue: InitailProps = {
   setCurrentStep: () => {},
 };
 
-export const AuthContext = React.createContext(initialValue);
+ const AuthContext = React.createContext(initialValue);
 const { Provider } = AuthContext;
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
