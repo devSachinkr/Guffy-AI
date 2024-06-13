@@ -60,3 +60,29 @@ export const onGetAllAccDomain = async () => {
     console.log(error);
   }
 };
+
+export const integrateDomain = async (domain: string, icon: string) => {
+  const user = await currentUser();
+  if (!user) return;
+  try {
+    const res = await prisma.user.findUnique({
+      where: {
+        clerkId: user.id,
+      },
+      select: {
+        subscription: {
+          select: {
+            plan: true,
+          },
+        },
+        _count: {
+          select: {
+            domains: true,
+          },
+        },
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
