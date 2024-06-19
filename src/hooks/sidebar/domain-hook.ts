@@ -1,4 +1,5 @@
 "use client";
+import { integrateDomain } from "@/actions/settings";
 import { addDomainSchema } from "@/schema/settings";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UploadClient } from "@uploadcare/upload-client";
@@ -30,6 +31,6 @@ export const useDomain = () => {
   const addDomain = handleSubmit(async (values: FieldValues) => {
     setLoading(true);
     const upload = await client.uploadFile(values.image[0]);
-    const domain = await integrateDomain(values.domain, upload.cdnUrl);
+    const domain = await integrateDomain(values.domain, upload.cdnUrl!);
   });
 };

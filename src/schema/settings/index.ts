@@ -34,7 +34,7 @@ export const addDomainSchema = z.object({
         /^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,3}$/.test(value ?? ''),
       'This is not a valid domain'
     ),
-  image: z
+  image: z 
     .any()
     .refine((files) => files?.[0]?.size <= MAX_UPLOAD_SIZE, {
       message: 'Your file size must be less then 2MB',
@@ -59,7 +59,7 @@ export const DomainSettingsSchema = z
     image: z.any().optional(),
     welcomeMessage: z
       .string()
-      .min(6, 'The message must be atleast 6 characters')
+      .min(6, 'The message must be atleast 6 characters')  
       .optional()
       .or(z.literal('').transform(() => undefined)),
   })
@@ -107,3 +107,4 @@ export const AddProductSchema = z.object({
     }),
   price: z.string(),
 })
+ 

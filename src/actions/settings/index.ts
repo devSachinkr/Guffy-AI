@@ -82,6 +82,37 @@ export const integrateDomain = async (domain: string, icon: string) => {
         },
       },
     });
+
+    const domianAlreadyExist = prisma.user.findFirst({
+      where: { clerkId: user.id, domains: { some: { name: domain } } },
+    });
+    if (!domianAlreadyExist) {
+      if (
+        (res?.subscription?.plan === "STANDARD" && res?._count?.domains < 1) ||
+        (res?.subscription?.plan === "PRO" && res?._count?.domains < 5) ||
+        (res?.subscription?.plan === "ULTIMATE" && res?._count?.domains < 10)
+      ) {
+        const newDomain = await prisma.user.update({
+          where: {
+            clerkId: user.id,
+          },
+          data: {
+            domains: {
+              create: {
+                name: domain,
+                icon: icon,
+                chatBot: {
+                  create: {
+                    welcomeMessage:
+                      "Hey there! you have a question? Text us here ",
+                  },
+                },
+              },
+            },
+          },
+        });
+      }
+    }
   } catch (error) {
     console.log(error);
   }

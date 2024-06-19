@@ -12,7 +12,7 @@ import parse from "html-react-parser";
 import { getMonthName } from "@/lib/utils";
 type Props = {};
 
-const page = async (props: Props) => {
+const page = async (props: Props) => {  
   const posts:
     | {
         id: string;
@@ -94,9 +94,7 @@ const page = async (props: Props) => {
               <Card className="flex flex-col gap-2 rounded-xl overflow-hidden h-full hover:bg-gray-600 ">
                 <div className="relative w-full aspect-video">
                   <Image
-                    src={String(process.env.CLOUDWAYS_UPLOADS_URL).concat(
-                      p.image
-                    )}
+                    src={p.image}
                     alt="blog images"
                     fill
                   />
@@ -110,7 +108,6 @@ const page = async (props: Props) => {
                     {p.createdAt.getDate()}, {p.createdAt.getFullYear()}
                   </CardDescription>
                   <CardTitle>{p.title}</CardTitle>
-                  {parse(p.content.slice(4, 100))}...
                 </div>
               </Card>
             </Link>

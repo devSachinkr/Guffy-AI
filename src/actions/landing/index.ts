@@ -14,21 +14,19 @@ export const getBlogPosts = async () => {
     const Post: posts = [];
     const res = await axios.get(process.env.CLOUDWAYS_POSTS_URL!);
     let i = 0;
-    while (i < res.data.length) {
-      const featuredImages = await axios.get(
-        process.env.CLOUDWAYS_FEATURED_IMAGES_URL!
-      );
-      if (featuredImages) {
-        Post.push({
-          id: res?.data[i]?.id,
-          title: res?.data[i]?.title?.rendered,
-          image: featuredImages?.data[i]?.media_details?.file,
-          content: res?.data[i]?.content?.rendered,
-          createdAt: new Date(res?.data[i]?.date),
-        });
-      }
-      i++;
+    // console.log(res.data)
+    for(i=0;i<res?.data?.length;i++){
+      Post.push({
+        id: res?.data[i]?.id,
+        title: res?.data[i]?.title?.rendered,
+        image: res?.data[i]?.jetpack_featured_media_url,
+        content: res?.data[i]?.content?.rendered,
+        createdAt: new Date(res?.data[i]?.date),
+      });
     }
+      
+    console.log("post",Post)
+    
     if (Post.length < 0) {
       return null;
     }
