@@ -111,8 +111,21 @@ export const integrateDomain = async (domain: string, icon: string) => {
             },
           },
         });
+        if (newDomain) {
+          return { status: 200, message: "Domain added successfully" };
+        }
       }
+      return {
+        status: 400,
+        message:
+          "You have reached the maximum number of domains | Try upgrading your plan",
+      };
     }
+
+    return {
+      status: 400,
+      message: "Domain already exist",
+    };
   } catch (error) {
     console.log(error);
   }

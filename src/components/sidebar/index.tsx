@@ -1,3 +1,4 @@
+'use client';
 import useSideBar from "@/hooks/sidebar/sidebar-hook";
 import { cn } from "@/lib/utils";
 import React from "react";

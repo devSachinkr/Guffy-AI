@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { Dispatch } from "react";
 import logo from "../../../public/fuffyLogo.png";
-import { LogOut, Menu } from "lucide-react";
+import { LogOut, Menu, Smartphone } from "lucide-react";
 import { SIDEBAR_MENU } from "@/constants/menu-items";
 import DomainMenu from "./domain-menu";
 import MenuItem from "./menu-item";
@@ -59,8 +59,13 @@ const MainMenu = ({ currentPage, domain, onExpand, onSignOut }: Props) => {
           size="max"
           label="Sign Out"
           icon={<LogOut/>}
-          onClick={onSignOut}
+          onSignOut={onSignOut}
           currentPage={currentPage}
+          />
+          <MenuItem
+          size="max"
+          label="Mobile App"
+          icon={<Smartphone/>}
           />
         </div>
       </div>

@@ -14,7 +14,6 @@ export const getBlogPosts = async () => {
     const Post: posts = [];
     const res = await axios.get(process.env.CLOUDWAYS_POSTS_URL!);
     let i = 0;
-    // console.log(res.data)
     for(i=0;i<res?.data?.length;i++){
       Post.push({
         id: res?.data[i]?.id,
@@ -25,14 +24,13 @@ export const getBlogPosts = async () => {
       });
     }
       
-    console.log("post",Post)
     
     if (Post.length < 0) {
       return null;
     }
     return Post;
-  } catch (error) {
-    console.log(error);
+  } catch (error:any) {
+    console.log(error.message);
   }
 };
 

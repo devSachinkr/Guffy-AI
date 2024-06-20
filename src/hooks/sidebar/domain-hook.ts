@@ -1,10 +1,11 @@
 "use client";
 import { integrateDomain } from "@/actions/settings";
+import { ToastNotify } from "@/components/global/ToastNotify";
 import { addDomainSchema } from "@/schema/settings";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UploadClient } from "@uploadcare/upload-client";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 const client = new UploadClient({
@@ -32,5 +33,23 @@ export const useDomain = () => {
     setLoading(true);
     const upload = await client.uploadFile(values.image[0]);
     const domain = await integrateDomain(values.domain, upload.cdnUrl!);
+    if (domain) {
+      reset();
+      setLoading(false);
+      ToastNotify({
+        title: `${domain.status === 200 ? "Success" : "Oopse!"}`,
+        desc: `${domain.message}`,
+      });
+      router.refresh();
+    }
   });
+  return {
+    addDomain,
+    register,
+    loading,
+    setLoading,
+    isDomain,
+    setIsDomain,
+    errors,
+  };
 };
