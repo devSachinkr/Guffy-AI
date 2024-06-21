@@ -10,6 +10,7 @@ import { getBlogPosts } from "@/actions/landing/index";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import parse from "html-react-parser";
 import { getMonthName } from "@/lib/utils";
+import DashboardIcon from "@/icons/dashboard-icon";
 type Props = {};
 
 const page = async (props: Props) => {  

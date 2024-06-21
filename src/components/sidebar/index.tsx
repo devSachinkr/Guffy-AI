@@ -1,49 +1,51 @@
-'use client';
-import useSideBar from "@/hooks/sidebar/sidebar-hook";
-import { cn } from "@/lib/utils";
-import React from "react";
-import MainMenu from "./main-menu";
+'use client'
+import useSideBar from '@/hooks/sidebar/sidebar-hook'
+import { cn } from '@/lib/utils'
+import React from 'react'
+import MaxMenu from './max-menu'
+import { MinMenu } from './min-menu'
 
 type Props = {
-  domain:
+  domains:
     | {
-        id: string;
-        name: string;
-        icon: string;
+        id: string
+        name: string
+        icon: string
       }[]
     | null
-    | undefined;
-};
+    | undefined
+}
 
-const Sidebar = ({ domain }: Props) => {
-  const { expands, onExpand, currentPage, onSignOut } = useSideBar();
+const SideBar = ({ domains }: Props) => {
+  const { expands, onExpand, currentPage, onSignOut } = useSideBar()
+
   return (
     <div
       className={cn(
-        "bg-cream_solid h-full w-[60px] fill-mode-forwards fixed md:relative",
-        expands == undefined && "",
+        'bg-cream_solid dark:bg-neutral-950 h-full  fill-mode-forwards fixed md:relative  ',
+        expands == undefined && 'w-[60px]',
         expands == true
-          ? "animate-open-sidebar"
-          : expands == false && "animate-close-sidebar"
+          ? 'animate-open-sidebar max-w-[200px]'
+          : expands == false && 'animate-close-sidebar w-[60px]'
       )}
     >
       {expands ? (
-        <MainMenu
-          domain={domain}
+        <MaxMenu
+          domains={domains}
+          current={currentPage!}
           onExpand={onExpand}
-          currentPage={currentPage}
           onSignOut={onSignOut}
         />
       ) : (
-        <MainMenu
-          domain={domain}
-          onExpand={onExpand}
-          currentPage={currentPage}
+        <MinMenu
+          domains={domains}
+          onShrink={onExpand}
+          current={currentPage!}
           onSignOut={onSignOut}
-        /> 
+        />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default SideBar

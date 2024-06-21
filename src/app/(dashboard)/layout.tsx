@@ -14,7 +14,7 @@ const layout = async ({ children }: Props) => {
 
     <div className="flex flex-col h-screen w-full">
       {/* {children} */}
-      <Sidebar domain={user.domain}/>
+      <Sidebar domains={user.domain}/>
       </div>
   </ChatProvider>;
 };

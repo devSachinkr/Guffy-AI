@@ -1,8 +1,7 @@
-import Image from "next/image";
-import React, { Dispatch } from "react";
-import logo from "../../../public/fuffyLogo.png";
-import { LogOut, Menu, Smartphone } from "lucide-react";
 import { SIDEBAR_MENU } from "@/constants/menu-items";
+import { LogOut, Menu, Smartphone } from "lucide-react";
+import Image from "next/image";
+import logo from "../../../public/fuffyLogo.png";
 import DomainMenu from "./domain-menu";
 import MenuItem from "./menu-item";
 type Props = {
@@ -48,10 +47,10 @@ const MainMenu = ({ currentPage, domain, onExpand, onSignOut }: Props) => {
               size="max"
               {...item}
               key={idx}
-              currentPage={currentPage}
+              current={currentPage}
             />
           ))}
-          <DomainMenu domain={domain} />
+          <DomainMenu domains={domain} />
         </div>
         <div className="flex flex-col">
           <div className="text-xs text-gray-500 mb-3">OPTIONS</div>
@@ -60,7 +59,7 @@ const MainMenu = ({ currentPage, domain, onExpand, onSignOut }: Props) => {
           label="Sign Out"
           icon={<LogOut/>}
           onSignOut={onSignOut}
-          currentPage={currentPage}
+          current={currentPage}
           />
           <MenuItem
           size="max"

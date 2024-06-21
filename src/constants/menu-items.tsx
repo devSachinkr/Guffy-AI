@@ -10,7 +10,7 @@ import TimerIcon from "@/icons/timer-icon";
 
 type SidebarMenuItemsProps = {
   label: string;
-  icon: React.ReactNode;
+  icon: JSX.Element;
   link: string;
 };
 export const SIDEBAR_MENU: SidebarMenuItemsProps[] = [
