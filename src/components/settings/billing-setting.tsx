@@ -13,6 +13,17 @@ const BillingSetting = async (props: Props) => {
           msg="Add payment info, upgrade and modify your plan"
         />
       </div>
+      <div className="lg:col-span-2">
+        <h3 className="text-xl font-semibold mb-2">Current Plan</h3>
+        <p className="text-sm font-semibold mb-2">{plan}</p>
+        <p className="text-sm font-light">
+          {plan === "PRO"
+            ? "Start growing your business today."
+            : plan === "ULTIMATE"
+            ? "The ultimate growth plan that you up for success"
+            : "Perfect if you're just getting started with Guffy AI"}
+        </p>
+      </div>
     </div>
   );
 };
