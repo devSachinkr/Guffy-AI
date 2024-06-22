@@ -7,12 +7,12 @@ type Props = {
   size: 'max' | 'min'
   label: string
   icon: JSX.Element
-  path?: string
+  link?: string
   current?: string
   onSignOut?(): void
 }
 
-const MenuItem = ({ size, path, icon, label, current, onSignOut }: Props) => {
+const MenuItem = ({ size, link, icon, label, current, onSignOut }: Props) => {
   switch (size) {
     case 'max':
       return (
@@ -22,11 +22,11 @@ const MenuItem = ({ size, path, icon, label, current, onSignOut }: Props) => {
             'flex items-center gap-2 px-1 py-2 rounded-lg my-1',
             !current
               ? 'text-gray-500'
-              : current == path
+              : current == link
               ? 'bg-white font-bold text-black'
               : 'text-gray-500'
           )}
-          href={path ? `/${path}` : '#'}
+          href={link ? `${link}` : '#'}
         >
           {icon} {label}
         </Link>
@@ -38,12 +38,12 @@ const MenuItem = ({ size, path, icon, label, current, onSignOut }: Props) => {
           className={cn(
             !current
               ? 'text-gray-500'
-              : current == path
+              : current == link
               ? 'bg-white font-bold text-black'
               : 'text-gray-500',
             'rounded-lg py-2 my-1'
           )}
-          href={path ? `/${path}` : '#'}
+          href={link ? `${link}` : '#'}
         >
          <ToolTip desc={label}> {icon}</ToolTip> 
         </Link>

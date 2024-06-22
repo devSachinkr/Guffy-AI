@@ -16,11 +16,11 @@ const UplpoadButton = ({ register, label, errors }: Props) => {
     <>
       <div className="flex gap-2 items-center">
         <Label
-          htmlFor={label}
+          htmlFor={"upload-button"}
           className=" flex gap-2 p-3 rounded-lg bg-cream_solid text-gray-600 cursor-pointer font-semibold items-center"
         >
-          <Input
-            {...register("image")}
+        <Input
+            {...register('image')}
             className="hidden"
             type="file"
             id="upload-button"

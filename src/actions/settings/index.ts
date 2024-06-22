@@ -83,10 +83,11 @@ export const integrateDomain = async (domain: string, icon: string) => {
       },
     });
 
-    const domianAlreadyExist = prisma.user.findFirst({
+    const domianAlreadyExist = await prisma.user.findFirst({
       where: { clerkId: user.id, domains: { some: { name: domain } } },
     });
     if (!domianAlreadyExist) {
+      console.log(res?.subscription?.plan, res?._count?.domains);
       if (
         (res?.subscription?.plan === "STANDARD" && res?._count?.domains < 1) ||
         (res?.subscription?.plan === "PRO" && res?._count?.domains < 5) ||

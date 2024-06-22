@@ -1,7 +1,7 @@
 "use server";
 import { prisma } from "@/lib/prisma";
 
-export const toogleRealTime = async (id: string, state: boolean) => {
+export const toggleRealTime = async (id: string, state: boolean) => {
   try {
     const res = await prisma.chatRoom.update({
       where: { id },
