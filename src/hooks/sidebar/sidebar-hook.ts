@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useChatContext } from "../../context/chat-context";
 import { ToastNotify } from "@/components/global/ToastNotify";
-import { getConversationMode, toogleRealTime } from "@/actions/conversation";
+import { getConversationMode, toggleRealTime} from "@/actions/conversation";
 import { useClerk } from "@clerk/nextjs";
 
 const useSideBar = () => {
@@ -19,7 +19,7 @@ const useSideBar = () => {
   const activateRealtime = async (e: any) => {
     let realtime;
     try {
-      realtime = await toogleRealTime(
+      realtime = await toggleRealTime(
         chatRoom!,
         e.target.ariaChecked == "true" ? false : true
       );

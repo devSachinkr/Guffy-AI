@@ -9,7 +9,6 @@ import { Loader } from '../global/loader'
 import FormGenerator from '../forms/form-generator/sign-up-details'
 import UplpoadButton from '../upload-button'
 import { useDomain } from '@/hooks/sidebar/domain-hook'
-import ToolTip from '../global/Tooltip'
 
 type Props = {
   min?: boolean
@@ -68,7 +67,7 @@ const DomainMenu = ({ domains, min }: Props) => {
           </Loader>
         </AppDrawer>
       </div>
-      <div className="flex flex-col gap-1 text-ironside font-medium">
+      <div className="flex flex-col gap-1 text-ironside font-medium justify-center items-center">
         {domains &&
           domains.map((domain) => (
             <Link
@@ -81,10 +80,11 @@ const DomainMenu = ({ domains, min }: Props) => {
               )}
             >
               <Image
-                src={`https://ucarecdn.com/${domain.icon}/`}
+                src={`${domain.icon}/`}
                 alt="logo"
-                width={20}
-                height={20}
+                width={40}
+                height={40}
+                className='rounded-full aspect-square'
               />
               {!min && <p className="text-sm">{domain.name}</p>}
             </Link>

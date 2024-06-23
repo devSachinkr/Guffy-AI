@@ -13,7 +13,7 @@ const layout = async ({ children }: Props) => {
   return (
     <ChatProvider>
       <div className="flex h-screen w-full">
-        <Sidebar domains={user.domain} />
+        <Sidebar domains={user.domains} />
         <div className="w-full h-screen flex flex-col py-3 pr-10 pl-20 md:pl-5 md:px-10">
           {children}
         </div>

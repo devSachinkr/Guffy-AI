@@ -11,6 +11,11 @@ export const completeUserReg = async (
         clerkId,
         fullName,
         type,
+        subscription: {
+          create: {
+            plan: "STANDARD",
+          },
+        },
       },
       select: {
         fullName: true,

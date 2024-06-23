@@ -18,7 +18,7 @@ type Props = {
 
 const SideBar = ({ domains }: Props) => {
   const { expands, onExpand, currentPage, onSignOut } = useSideBar()
-
+    
   return (
     <div
       className={cn(
