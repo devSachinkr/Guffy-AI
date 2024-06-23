@@ -57,7 +57,7 @@ const MainMenu = ({ currentPage, domain, onExpand, onSignOut }: Props) => {
           <MenuItem
           size="max"
           label="Sign Out"
-          icon={<LogOut/>}
+          icon={<LogOut className="text-white"/>}
           onSignOut={onSignOut}
           current={currentPage}
           />

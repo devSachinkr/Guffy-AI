@@ -4,6 +4,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { TooltipArrow } from "@radix-ui/react-tooltip";
 
 import React from "react";
 
@@ -15,11 +16,11 @@ type Props = {
 
 const ToolTip = ({ desc, name ,children}: Props) => {
   return (
-    <TooltipProvider delayDuration={0}>
+    <TooltipProvider delayDuration={0} >
       <Tooltip>
-        <TooltipTrigger>{name}{children && children}</TooltipTrigger>
-        <TooltipContent>
-          <p>{desc}</p>
+        <TooltipTrigger >{name}{children && children}</TooltipTrigger>
+        <TooltipContent >
+          <p >{desc}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

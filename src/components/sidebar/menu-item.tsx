@@ -19,16 +19,16 @@ const MenuItem = ({ size, link, icon, label, current, onSignOut }: Props) => {
         <Link
           onClick={onSignOut}
           className={cn(
-            'flex items-center gap-2 px-1 py-2 rounded-lg my-1',
+            'flex items-center gap-2 px-1 py-2 rounded-lg my-1 text-white',
             !current
-              ? 'text-gray-500'
+              ? 'text-white'
               : current == link
               ? 'bg-white font-bold text-black'
               : 'text-gray-500'
           )}
           href={link ? `${link}` : '#'}
         >
-          {icon} {label}
+          {icon} <p className='text-white'>{label}</p>
         </Link>
       )
     case 'min':
