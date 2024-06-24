@@ -3,8 +3,8 @@ import { Spinner } from './spinner'
 import { cn } from '@/lib/utils'
 
 type LoaderProps = {
-  loading: boolean
-  children: React.ReactNode
+  loading?: boolean
+  children?: React.ReactNode
   className?: string
 }
 

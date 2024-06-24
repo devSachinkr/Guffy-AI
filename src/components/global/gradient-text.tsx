@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import React from "react";
 
 type Props = {
@@ -12,9 +13,11 @@ type Props = {
 const GradientText = ({ text, from, to, classes, size, children }: Props) => {
   return (
     <div
-      className={`bg-gradient-to-r from-${`${from}`}-500 to-${`${to}`}-200 text-transparent bg-clip-text relative`}
+      className={`bg-gradient-to-r from-red-500 via-blue-500 to-blue-700 text-transparent bg-clip-text relative`}
     >
-      {text} {children && children}
+      <p className={cn(classes, size)}>
+        {text} {children && children}
+      </p>
     </div>
   );
 };

@@ -1,6 +1,9 @@
 "use client";
 
+import { changePassword } from "@/actions/settings";
+import { ToastNotify } from "@/components/global/ToastNotify";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -33,12 +36,41 @@ export const useChangePassword = () => {
       confirmPassword: "",
     },
   });
-  const handleChangePassword = async (
-    data: z.infer<typeof ChangePasswordSchema>
-  ) => {
-
-
-    <div className=""></div>
+  const [loading, setLoading] = useState<boolean>(false);
+  const handleChangePassword = handleSubmit(
+    async (data: z.infer<typeof ChangePasswordSchema>) => {
+      try {
+        setLoading(true);
+        const update = await changePassword(data.password);
+        if (update) {
+          reset();
+          setLoading(false);
+          ToastNotify({
+            title: "Success",
+            desc: `${update.message}`,
+          });
+        } else {
+          setLoading(false);
+          ToastNotify({
+            title: "Oopse!",
+            //@ts-ignore
+            desc: `${update.message ?? "Something went wrong"}`,
+          });
+        }
+      } catch (error:any) {
+        setLoading(false);
+        console.log(error);
+        ToastNotify({
+          title: "Oopse!",
+          desc: `${error.message ?? "Something went wrong"}`,
+        });
+      }
+    }
+  );
+  return {
+    register,
+    errors,
+    handleChangePassword,
+    loading,
   };
-  return {};
 };

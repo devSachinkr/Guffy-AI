@@ -12,7 +12,7 @@ interface Props {
   placeholder?: string;
   lines?: number;
   form?: string;
-  register: UseFormRegister<FieldValues>;
+  register: UseFormRegister<FieldValues|any>;
   errors: FieldErrors<FieldValues>;
   name: string;
 }

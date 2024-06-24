@@ -76,15 +76,15 @@ const DomainMenu = ({ domains, min }: Props) => {
               className={cn(
                 'flex gap-3 hover:bg-white rounded-full transition duration-100 ease-in-out cursor-pointer ',
                 !min ? 'p-2' : 'py-2',
-                domain.name.split('.')[0] == isDomain && 'bg-white'
+                domain.name.split('.')[0] == isDomain && ' border-dashed border-[1px] border-stone-400 rounded-full aspect-square justify-center'
               )}
             >
               <Image
                 src={`${domain.icon}/`}
                 alt="logo"
-                width={40}
-                height={40}
-                className='rounded-full aspect-square'
+                width={30}
+                height={30}
+                className=''
               />
               {!min && <p className="text-sm">{domain.name}</p>}
             </Link>
