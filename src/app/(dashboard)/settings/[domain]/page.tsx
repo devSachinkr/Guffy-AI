@@ -15,9 +15,9 @@ const page = async ({ params: { domain } }: Props) => {
   const domainData = await getDomainData(domain);
   if (!domainData.data || !domainData.data.subscription || !domainData.data.domains) return redirect("/dashboard");
   return (
-    <>
+    <div>
       <InfoBar />
-      <div className="overflow-y-auto w-full chat-window flex-1 h-0">
+      <div className="overflow-y-auto w-full chat-window flex-1 ">
         <SettingForm
           plan={domainData.data.subscription.plan}
           // @ts-ignore
@@ -26,7 +26,7 @@ const page = async ({ params: { domain } }: Props) => {
           name={domainData.data.domains[0].name}
         />
       </div>
-    </>
+    </div>
   );
 };
 

@@ -2,6 +2,7 @@
 
 import { clerkClient, currentUser } from "@clerk/nextjs";
 import { prisma } from "@/lib/prisma";
+import { domainSettingProp } from "@/schema/settings";
 export const getSubscriptionPlan = async () => {
   try {
     const user = await currentUser();
@@ -193,5 +194,132 @@ export const getDomainData = async (domain: string) => {
   } catch (error) {
     console.log(error);
     return { status: 500, message: "Internal server error" };
+  }
+};
+
+export const updateDomain = async (id: string, name: string) => {
+  const user = await currentUser();
+  if (!user) {
+    return { status: 404, message: "sign in required" };
+  }
+  try {
+    // find same name domain (if exist)
+    const res = await prisma.domain.findFirst({
+      where: {
+        name: {
+          contains: name,
+        },
+      },
+    });
+    if (!res) {
+      const domain = await prisma.domain.update({
+        where: { id },
+        data: {
+          name,
+        },
+      });
+      if (domain) {
+        return { status: 200, message: "Domain updated successfully" };
+      }
+      return {
+        status: 400,
+        message: "Something went wrong",
+      };
+    }
+    return {
+      status: 400,
+      message: "Domain with that name already exist",
+    };
+  } catch (err) {
+    console.log(err);
+    return { status: 500, message: "Internal server error" };
+  }
+};
+
+export const chatBotImageUpdate = async (id: string, avatar: string) => {
+  const user = await currentUser();
+  if (!user) {
+    return { status: 404, message: "sign in required" };
+  }
+  try {
+    const res = await prisma.domain.update({
+      where: { id },
+      data: {
+        chatBot: {
+          update: {
+            data: {
+              icon: avatar,
+            },
+          },
+        },
+      },
+    });
+    if (res) {
+      return { status: 200, message: "Domain updated successfully" };
+    }
+    return {
+      status: 400,
+      message: "Something went wrong",
+    };
+  } catch (error) {
+    console.log(error);
+    return { status: 500, message: "Internal server error" };
+  }
+};
+
+export const updateWelcomeMessage = async (id: string, message: string) => {
+  const user = await currentUser();
+  if (!user) {
+    return { status: 404, message: "sign in required" };
+  }
+  try {
+    const res = await prisma.domain.update({
+      where: { id },
+      data: {
+        chatBot: {
+          update: {
+            welcomeMessage: message,
+          },
+        },
+      },
+    });
+    if (res) {
+      return { status: 200, message: "Domain updated successfully" };
+    }
+    return {
+      status: 400,
+      message: "Something went wrong",
+    };
+  } catch (error) {
+    console.log(error);
+    return { status: 500, message: "Internal server error" };
+  }
+};
+
+export const delDomain = async (id: string) => {
+  const user = await currentUser();
+  if (!user) {
+    return { status: 404, message: "sign in required" };
+  }
+  try {
+    const validUser = await prisma.user.findUnique({
+      where: {
+        clerkId: user.id,
+      },
+      select: {
+        id: true,
+      },
+    });
+    const res = await prisma.domain.delete({
+      where: { userId: validUser?.id, id },
+      select: { name: true },
+    });
+    if (res) {
+      return { status: 200, message: `${res.name} was deleted successfully` };
+    }
+    return { status: 400, message: "Something went wrong" };
+  } catch (error) {
+    console.log(error);
+    return { status: 500, message: "Internal Server Error" };
   }
 };

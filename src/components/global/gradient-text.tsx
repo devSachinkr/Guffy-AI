@@ -12,13 +12,13 @@ type Props = {
 
 const GradientText = ({ text, from, to, classes, size, children }: Props) => {
   return (
-    <div
+    <span
       className={`bg-gradient-to-r from-red-500 via-blue-500 to-blue-700 text-transparent bg-clip-text relative`}
     >
-      <p className={cn(classes, size)}>
+      <span className={cn(classes, size)}>
         {text} {children && children}
-      </p>
-    </div>
+      </span>
+    </span>
   );
 };
 
