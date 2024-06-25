@@ -79,6 +79,15 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      rotate:{
+        '45': '45deg',
+        '90': '90deg',
+        '135': '135deg',
+        '180': '180deg',
+        '225': '225deg',
+        '270': '270deg',
+        '315': '315deg',
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

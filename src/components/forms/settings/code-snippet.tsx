@@ -1,4 +1,5 @@
-import ToolTip from "@/components/global/Tooltip";
+"use client";
+import { ToastNotify } from "@/components/global/ToastNotify";
 import Section from "@/components/settings/section";
 import { Copy } from "lucide-react";
 import React from "react";
@@ -42,13 +43,19 @@ const CodeSnippet = ({ id }: Props) => {
         label="Code snippet"
         msg="Copy the code snippet and paste into the header tag of your website"
       />
-      <div className="glassMorPhism px-10 rounded-lg inline-block relative mt-2">
-          <Copy
-            className="absolute top-5 right-5 text-gray-400 cursor-pointer"
-            onClick={() => navigator.clipboard.writeText(snippet)}
-          />
+      <div className="glassMorPhism px-10 rounded-lg inline-block relative mt-2 w-full">
+        <Copy
+          className="absolute top-5 right-5 text-gray-400 cursor-pointer"
+          onClick={() => (
+            navigator.clipboard.writeText(snippet),
+            ToastNotify({
+              title: "Success",
+              desc: "Copied to clipboard",
+            })
+          )}
+        />
         <pre>
-          <code className="text-gray-50 ">{snippet}</code>
+          <code className="text-gray-50 text-wrap ">{snippet}</code>
         </pre>
       </div>
     </div>
