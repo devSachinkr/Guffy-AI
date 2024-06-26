@@ -46,7 +46,7 @@ export const SIDEBAR_MENU: SidebarMenuItemsProps[] = [
   },
 ];
 
-type TABS_MENU_PROPS = {
+export type TABS_MENU_PROPS = {
     label: string
     icon?: JSX.Element
   }

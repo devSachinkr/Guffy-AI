@@ -323,3 +323,160 @@ export const delDomain = async (id: string) => {
     return { status: 500, message: "Internal Server Error" };
   }
 };
+
+export const addQuestion = async (
+  id: string,
+  question: string,
+  answer: string
+) => {
+  const user = await currentUser();
+  if (!user) {
+    return { status: 404, message: "sign in required" };
+  }
+  try {
+    const res = await prisma.domain.update({
+      where: { id },
+      data: {
+        helpdesk: {
+          create: {
+            answer,
+            question,
+          },
+        },
+      },
+      include: {
+        helpdesk: {
+          select: {
+            answer: true,
+            question: true,
+            id: true,
+          },
+        },
+      },
+    });
+    if (res) {
+      return {
+        status: 200,
+        message: "Question added successfully",
+        questions: res.helpdesk,
+      };
+    }
+    return {
+      status: 400,
+      message: "Something went wrong",
+    };
+  } catch (error) {
+    console.log(error);
+    return { status: 500, message: "Internal server error" };
+  }
+};
+
+export const getHelpDeskQuestion = async (id: string) => {
+  const user = await currentUser();
+  if (!user) {
+    return { status: 404, message: "sign in required" };
+  }
+  try {
+    const res = await prisma.domain.findUnique({
+      where: { id },
+      include: {
+        helpdesk: {
+          select: {
+            answer: true,
+            question: true,
+            id: true,
+          },
+        },
+      },
+    });
+    if (res) {
+      return {
+        status: 200,
+        message: "Helpdesk questions fetched successfully",
+        questions: res.helpdesk,
+      };
+    }
+    return {
+      status: 400,
+      message: "Something went wrong",
+    };
+  } catch (error) {
+    console.log(error);
+    return { status: 500, message: "Internal server error" };
+  }
+};
+
+export const filterQuestion = async (id: string, question: string) => {
+  const user = await currentUser();
+  if (!user) {
+    return { status: 404, message: "sign in required" };
+  }
+  try {
+    const res = await prisma.domain.update({
+      where: { id },
+      data: {
+        filterQuestions: {
+          create: {
+            question,
+          },
+        },
+      },
+      include: {
+        filterQuestions: {
+          select: {
+            id: true,
+            question: true,
+          },
+        },
+      },
+    });
+    if (res) {
+      return {
+        status: 200,
+        message: "Question added successfully",
+        question: res.filterQuestions,
+      };
+    }
+    return { status: 400, message: "Something went wrong" };
+  } catch (error) {
+    console.log(error);
+    return { status: 500, message: "Internal server error" };
+  }
+};
+
+export const getFilterQuestion = async (id: string) => {
+  const user = await currentUser();
+  if (!user) {
+    return { status: 404, message: "sign in required" };
+  }
+  try {
+    const res = await prisma.domain.findUnique({
+      where: { id },
+      include: {
+        filterQuestions: {
+          select: {
+            id: true,
+            question: true,
+          },
+          orderBy: {
+            question: "asc",
+          },
+        },
+      },
+    });
+    if (res) {
+      return {
+        status: 200,
+        message: "Filter questions fetched successfully",
+        questions: res.filterQuestions,
+      };
+    }
+    return {
+      status: 400,
+      message: "Something went wrong",
+    };
+  } catch (error) {
+    console.log(error);
+    return { status: 500, message: "Internal server error" };
+  }
+};

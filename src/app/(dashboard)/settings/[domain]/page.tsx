@@ -1,5 +1,6 @@
 import { getDomainData } from "@/actions/settings";
 import InfoBar from "@/components/dashboard/infobar";
+import BotTraningForm from "@/components/dashboard/settings/bot-traning-form";
 import SettingForm from "@/components/forms/settings/setting-form";
 import GradientText from "@/components/global/gradient-text";
 import { redirect } from "next/navigation";
@@ -24,6 +25,9 @@ const page = async ({ params: { domain } }: Props) => {
           chatbot={domainData.data.domains[0].chatBot}
           id={domainData.data.domains[0].id}
           name={domainData.data.domains[0].name}
+        />
+        <BotTraningForm
+         id={domainData.data.domains[0].id}
         />
       </div>
     </div>

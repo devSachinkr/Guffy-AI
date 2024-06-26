@@ -111,4 +111,6 @@ export interface domainSettingProp {
   domain?: string;
   image?: string;
   welcomeMessage?: string;
-} 
+}
+
+
