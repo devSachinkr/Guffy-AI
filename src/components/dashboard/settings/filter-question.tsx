@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { useFilterQuestion } from "@/hooks/settings/filter-question";
 import React from "react";
+
 import Accordion from "./Accordion";
 import GradientText from "@/components/global/gradient-text";
 
@@ -72,18 +73,16 @@ const FilterQuestion = ({ id }: Props) => {
         <Loader loading={loading}>
           {isQuestion.length ? (
             isQuestion.map((question, index) => (
-              <Accordion
-                key={index}
-                trigger={question.question}
-                content={question.answer ?? ""}
-              />
+              <p key={index} className="font-bold">
+                {question.question}
+              </p>
             ))
           ) : (
             <CardDescription className="text-[2rem]">
               No Question
             </CardDescription>
           )}
-        </Loader>   
+        </Loader>
       </CardContent>
     </Card>
   );
