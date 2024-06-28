@@ -1,5 +1,6 @@
 "use client";
 
+import { Role } from "@prisma/client";
 import React, { useState } from "react";
 
 type ChatInitialValuesProps = {
@@ -10,7 +11,8 @@ type ChatInitialValuesProps = {
   chats: {
     message: string;
     id: string;
-    role: "assistant" | "user" | null;
+    role: Role | null;
+
     createdAt: Date;
     seen: boolean;
   }[];
@@ -19,7 +21,7 @@ type ChatInitialValuesProps = {
       {
         message: string;
         id: string;
-        role: "assistant" | "user" | null;
+        role: Role | null;
         createdAt: Date;
         seen: boolean;
       }[]
