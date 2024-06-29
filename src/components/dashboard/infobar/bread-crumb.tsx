@@ -1,8 +1,8 @@
 "use client";
 import { Loader } from "@/components/global/loader";
+import { Switch } from "@/components/ui/switch";
 import { useChatContext } from "@/context/chat-context";
 import useSideBarContext from "@/context/sidebar-context";
-import { Switch } from "@radix-ui/react-switch";
 // import useSideBar from "@/hooks/sidebar/sidebar-hook";
 import React from "react";
 
@@ -23,7 +23,7 @@ const Breadcrumb = (props: Props) => {
     <div className="flex flex-col">
       <div className="flex gap-5 items-center">
         <h2 className="text-3xl font-bold capitalize">{page}</h2>
-        {page === "conversations"  && (
+        {page === "conversations" && chatRoom && (
           <Loader loading={loading} className="p-0 inline">
             <Switch
               defaultChecked={realtime}
@@ -45,7 +45,6 @@ const Breadcrumb = (props: Props) => {
           : page == "intergations"
           ? "Integrate third-party applications with Guffy AI effortlessly."
           : "Adjust domains and various settings, customize chatbot options, input sales queries, and train your chatbot to perform tasks according to your preferences."}
-      
       </p>
     </div>
   );

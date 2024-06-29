@@ -4,6 +4,9 @@ import { useChatWindow } from "@/hooks/conversations/chat-window";
 import React from "react";
 import { Loader } from "../global/loader";
 import Bubble from "../chatbot/bubble";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { Paperclip } from "lucide-react";
 
 type Props = {};
 
@@ -30,11 +33,34 @@ const Chats = (props: Props) => {
                 />
               ))
             ) : (
-              <div>NO!  ( Chat selected ).</div>
+              <div>NO! ( Chat selected ).</div>
             )}
           </div>
         </Loader>
       </div>
+      <form
+        onSubmit={handelSentMessage}
+        className="flex px-3 pt-3 pb-10  flex-col backdrop-blur-sm bg-muted w-full"
+      >
+        <div className="flex justify-between">
+          <Input
+            {...register("content")}
+            placeholder="Send a message..."
+            className="focus-visible:ring-0 flex-1 p-0
+        focus-visible:ring-offset-0 bg-muted rounded-none outline-none border-none
+        "
+          />
+          <Button type="submit" className="mt-3 px-7
+          bg-stone-800 hover:bg-stone-700
+          text-white"
+           disabled={!chatRoom}>
+            Send
+          </Button>
+        </div>
+        <span>
+          <Paperclip className="text-muted-foreground" />
+        </span>
+      </form>
     </div>
   );
 };

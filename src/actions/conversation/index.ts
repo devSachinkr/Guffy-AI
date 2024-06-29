@@ -234,7 +234,7 @@ export const realTimeChat = async (
   chatRoomId: string,
   message: string,
   id: string,
-  role: Role
+  role: Role|null
 ) => {
   // pusherServer.trigger(chatRoomId, "realtime-mode", {
   //   chat: {

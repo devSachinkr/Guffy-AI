@@ -78,7 +78,7 @@ const Bubble = ({ createdAt, message: { link, role, message } }: Props) => {
                 className="underline font-bold pl-2"
                 href={link}
                 target="_blank"
-              >
+              > 
                 Your Link
               </Link>
             )}
