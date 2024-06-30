@@ -58,13 +58,11 @@ export const useChatbot = () => {
   >(undefined);
 
   const scrollToBottom = () => {
-    if (messageRef.current) {
-      messageRef.current.scroll({
+      messageRef?.current?.scroll({
         behavior: "smooth",
         left: 0,
         top: messageRef.current.scrollHeight,
       });
-    }
   };
   useEffect(() => {
     scrollToBottom();
@@ -78,21 +76,14 @@ export const useChatbot = () => {
       })
     );
   }, [open]);
-  let limitReq = 0;
-  useEffect(() => {
-    window.addEventListener("message", (e) => {
-      const botId = e.data;
-      if (limitReq < 1 && typeof botId === "string") {
-        getDomainChatBot(botId);
-        limitReq++;
-      }
-    });
-  }, []);
+
 
   const getDomainChatBot = async (botId: string) => {
+    console.log(botId)
     setLoading(true);
     setCurrBotId(botId);
     const res = await getChatBot(botId);
+    console.log(res)
     if (res) {
       setOnChats((prev) => [
         ...prev,
@@ -105,6 +96,18 @@ export const useChatbot = () => {
       setLoading(false);
     }
   };
+  let limitReq = 0;
+ 
+  useEffect(() => {
+    window.addEventListener('message', (e) => {
+      console.log(e.data)
+      const botid = e.data
+      if (limitReq < 1 && typeof botid == 'string') {
+        getDomainChatBot(botid)
+        limitReq++
+      }
+    })
+  }, [])
   const startChating = handleSubmit(async (data: ChatBotMessageProps) => {
     reset();
     if (data.image.length) {
@@ -155,6 +158,7 @@ export const useChatbot = () => {
     }
   });
 
+  
   return {
     register,
     reset,

@@ -9,15 +9,15 @@ import Link from "next/link";
 type Props = {
   message: {
     role: Role | null;
-    message: string;
+    content: string;
     link?: string;
   };
   createdAt?: Date;
 };
 
-const Bubble = ({ createdAt, message: { link, role, message } }: Props) => {
+const Bubble = ({ createdAt, message: { link, role, content } }: Props) => {
   const date = new Date();
-  const image = extractUUIDFromString(message);
+  const image = extractUUIDFromString(content);
   return (
     <div
       className={cn(
@@ -42,7 +42,7 @@ const Bubble = ({ createdAt, message: { link, role, message } }: Props) => {
           'flex flex-col gap-3 min-w-[200px] max-w-[300px] p-4 rounded-t-md',
           role == 'ASSISTANT'
             ? 'bg-muted rounded-r-md'
-            : 'bg-grandis_solid rounded-l-md'
+            : 'bg-lime-500 text-black font-bold text-2xl rounded-l-md'
         )}
       >  
         {createdAt ? (
@@ -72,7 +72,7 @@ const Bubble = ({ createdAt, message: { link, role, message } }: Props) => {
           </div>
         ) : (
           <p className="text-sm">
-            {message.replace('(complete)', ' ')}
+            {content.replace('(complete)', ' ')}
             {link && (
               <Link
                 className="underline font-bold pl-2"

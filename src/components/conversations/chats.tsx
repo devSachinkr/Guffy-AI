@@ -27,7 +27,7 @@ const Chats = (props: Props) => {
                   key={index}
                   message={{
                     role: chat.role,
-                    message: chat.message,
+                    content: chat.message,
                   }}
                   createdAt={chat.createdAt}
                 />

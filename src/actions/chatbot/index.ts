@@ -9,6 +9,7 @@ import { sendMail } from "../mailer";
 import { openai } from "@/lib/openai";
 
 export const getChatBot = async (id: string) => {
+  console.log(id)
   const user = currentUser();
   if (!user) {
     return;
@@ -43,10 +44,11 @@ export const getChatBot = async (id: string) => {
       chatbot: res,
     };
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return {
       status: 500,
       message: "Internal server error",
+      id: id,
     };
   }
 };

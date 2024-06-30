@@ -21,6 +21,7 @@ const AiChatbot = (props: Props) => {
     loading,
     openChatBot
   } = useChatbot();
+  console.log(onChats);
   return (
     <div className="h-screen flex flex-col justify-end items-end gap-4">
       {open && (
